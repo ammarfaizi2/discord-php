@@ -293,7 +293,13 @@ class Discord
         $this->token     = $options['token'];
         $this->loop      = $options['loop'];
         $this->logger    = new Logger($options['logger'], $options['logging']);
-        $this->wsFactory = new Connector($this->loop, null, ['verify_peer_name' => false, 'allow_self_signed' => true]);
+        $this->wsFactory = new Connector($this->loop, null, 
+                [
+                    'allow_self_signed' => true, 
+                    'verify_peer'       => false,
+                    'verify_peer_name'  => false
+                ]
+            );
         $this->handlers  = new Handlers();
         $this->cachePool = $options['cachePool'];
 
